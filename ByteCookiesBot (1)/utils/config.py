@@ -1,8 +1,12 @@
 import os
-from dotenv import load_dotenv
 
-load_dotenv()
+BOT_TOKEN = os.environ.get("BOT_TOKEN")
+CRYPTOBOT_TOKEN = os.environ.get("CRYPTOBOT_TOKEN")
 
-BOT_TOKEN = os.getenv("BOT_TOKEN")
-CRYPTOBOT_TOKEN = os.getenv("CRYPTOBOT_TOKEN")
-ADMIN_ID = int(os.getenv("ADMIN_ID"))
+ADMIN_ID_STR = os.environ.get("ADMIN_ID")
+if ADMIN_ID_STR is None:
+    raise ValueError("ADMIN_ID is not set in environment variables.")
+try:
+    ADMIN_ID = int(ADMIN_ID_STR)
+except ValueError:
+    raise ValueError("ADMIN_ID must be an integer.")
